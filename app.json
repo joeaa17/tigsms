@@ -1,0 +1,7 @@
+{
+  "name": "Owl SMS Application",
+  "description": "A web client application for sending SMS messages using Twilio Programmable Messaging.",
+  "repository": "https://github.com/tigerfarm/owlsms",
+  "logo": "http://tigerfarmpress.com/images/topImgLeft.jpg",
+  "keywords": ["php", "Twilio", "SMS"]
+}
