@@ -30,7 +30,8 @@ $paramsFrom = array("from" => $msgFrom);
 $resultFrom = $client->messages->read($paramsFrom);
 echo '++ Delete messages from: ' . $msgFrom;
 foreach ($resultFrom as $message) {
-    echo "\xA- Delete: " . $message->dateSent->format("Y-m-d H:i:s") . " " . $message->sid
+    echo "\xA- Delete: " . $message->dateSent->format("Y-m-d H:i:s") . " "
+            // . $message->sid
             . " " . $message->from . " " . $message->to
             . " " . $message->status . " > " . $message->body;
     $client->messages($message->sid)->delete();
@@ -39,7 +40,8 @@ echo "\xA++ Delete messages to: " . $msgFrom;
 $paramsTo = array("to" => $msgFrom);
 $resultTo = $client->messages->read($paramsTo);
 foreach ($resultTo as $message) {
-    echo "\xA- Delete: " . $message->dateSent->format("Y-m-d H:i:s") . " " . $message->sid
+    echo "\xA- Delete: " . $message->dateSent->format("Y-m-d H:i:s") . " "
+            // . $message->sid
             . " " . $message->from . " " . $message->to
             . " " . $message->status . " > " . $message->body;
     $client->messages($message->sid)->delete();

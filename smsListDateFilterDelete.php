@@ -13,7 +13,8 @@ $params = array(
 $result = $client->messages->read($params);
 echo '++ Delete messages.';
 foreach ($result as $message) {
-    echo "\xA- Delete: " . $message->dateSent->format("Y-m-d H:i:s") . " " . $message->sid
+    echo "\xA- Delete: " . $message->dateSent->format("Y-m-d H:i:s") . " "
+            // . $message->sid
             . " " . $message->from . " " . $message->to
             . " " . $message->status . " > " . $message->body;
     $client->messages($message->sid)->delete();
