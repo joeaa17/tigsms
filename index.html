@@ -19,9 +19,10 @@
                         <td>Send from Twilio </td>
                         <td>
                             <select id="accountNumbers"></select>
-                            <span onclick="accNumbers();" class="abutton" style="font-size: 0.8em;padding: 2px 10px 0px 10px;">
-                                list
-                            </span>
+                        </td><td>
+                            <button id="btn-list" onclick="accNumbers();" class="abutton" style="font-size: 0.8em;padding: 2px 10px 0px 10px;width: 160px; height: 30px;">
+                                Get phone numbers
+                            </button>
                         </td><td><div id="msgMsgFrom"></div>
                         </td>
                     </tr>
@@ -33,13 +34,13 @@
             <div class="panelArea">
                 <table>
                     <tr>
-                        <td><button class="abutton" onclick="sendSms();">Send</button></td>
-                        <td><button class="abutton" onclick="conversation();">List Conversation</button></td>
-                        <td><button class="abutton" onclick="deleteConversation();">Delete Conversation</button></td>
-                        <td><button class="abutton" style="width: 70px;" onclick="listSms();">List today's</button></td>
-                        <td><button class="abutton" style="width: 70px;" onclick="deleteSms();">Delete today's</button></td>
-                        <td><button class="abutton" onclick="listSenderLogs();">List sender logs</button></td>
-                        <td><button class="abutton" onclick="deleteSenderLogs();">Delete sender logs</button></td>
+                        <td><button id="sendSms" class="abutton" onclick="sendSms();">Send</button></td>
+                        <td><button id="conversation" class="abutton" onclick="conversation();">List Conversation</button></td>
+                        <td><button id="deleteConversation" class="abutton" onclick="deleteConversation();">Delete Conversation</button></td>
+                        <td><button id="listSms" class="abutton" style="width: 70px;" onclick="listSms();">List today's</button></td>
+                        <td><button id="deleteSms" class="abutton" style="width: 70px;" onclick="deleteSms();">Delete today's</button></td>
+                        <td><button id="listSenderLogs" class="abutton" onclick="listSenderLogs();">List sender logs</button></td>
+                        <td><button id="deleteSenderLogs" class="abutton" onclick="deleteSenderLogs();">Delete sender logs</button></td>
                     </tr>
                 </table>
             </div>

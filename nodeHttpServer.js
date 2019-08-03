@@ -84,16 +84,38 @@ http.createServer(function (request, response) {
             });
             return;
         }
+        // ---------------------------------------------------------------------
         if (uri === "/smsListDateFilter.php"
                 || uri === "/smsListDateFilterDelete.php"
-                || uri === "/accountPhoneNumbers.php"
-                || uri === "/accountNumberList.php"
                 ) {
             var query = require('url').parse(request.url, true).query;
             console.log("+ Run: " + uri);
             const exec = require('child_process').exec;
             const theProgramName = uri;
             const theProgram = 'php ' + path.join(process.cwd(), theProgramName);
+            exec(theProgram, (error, stdout, stderr) => {
+                theResponse = `${stdout}`;
+                console.log('+ theResponse: ' + theResponse);
+                // console.log(`${stderr}`);
+                if (error !== null) {
+                    console.log(`exec error: ${error}`);
+                }
+                response.writeHead(200);
+                response.write(theResponse, "binary");
+                response.end();
+                console.log('+ Sent response.');
+            });
+            return;
+        }
+        // ---------------------------------------------------------------------
+        if (uri === "/accountPhoneNumbers.php"
+                || uri === "/accountNumberList.php"
+                ) {
+            var query = require('url').parse(request.url, true).query;
+            console.log("+ Run: " + uri + " " + query.tokenpassword);
+            const exec = require('child_process').exec;
+            const theProgramName = uri;
+            const theProgram = 'php ' + path.join(process.cwd(), theProgramName) + " " + query.tokenpassword;
             exec(theProgram, (error, stdout, stderr) => {
                 theResponse = `${stdout}`;
                 console.log('+ theResponse: ' + theResponse);

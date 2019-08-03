@@ -145,11 +145,23 @@ function deleteSenderLogs() {
 }
 function accNumbers() {
     clearMessages();
+    theSmsPassword = $("#smsPassword").val();
+    if (theSmsPassword === "") {
+        $("div#msgPassword").html("<b>Password is required</b>");
+        logger("- Required: Password.");
+        return;
+    }
     logger("Get account phone numbers and Messaging Services.");
     $("div#activityMessages").html("<b>Wait, getting account phone numbers...</b>");
-    $.get("accountPhoneNumbers.php", function (response) {
+    $.get("accountPhoneNumbers.php?tokenpassword=" + theSmsPassword, function (response) {
         logger(response);
+        if (response.startsWith("0")) {
+            $("div#msgPassword").html("<b>Password is invalid</b>");
+            logger("- Password invalid.");
+            return;
+        }
         $("div#activityMessages").html("+ Completed.");
+        setAccNumbers();
     }).fail(function () {
         logger("- Get account phone numbers failed.");
     });
@@ -211,7 +223,7 @@ function setAccNumbers() {
     //   options.append(new Option(this.text, this.value));
     // });
     $("div#activityMessages").html("+ Please wait, loading phone numbers...");
-    $.get("accountNumberList.php", function (response) {
+    $.get("accountNumberList.php?tokenpassword=" + theSmsPassword, function (response) {
         logger(response);
         if (response.indexOf("Credentials are required") > 0) {
             $("div#msgMsgFrom").html("Check environment credentials");
@@ -230,6 +242,7 @@ function setAccNumbers() {
         });
         $('#accountNumbers option')[0].selected = true; // by default, select the first option.
         $("div#activityMessages").html("+ Account phone numbers loaded.");
+        setButtons("ready");
     }).fail(function () {
         logger("- Get account phone numbers failed.");
     });
@@ -280,11 +293,36 @@ function clearLog() {
     log.value = "+ Ready";
 }
 window.onload = function () {
-    log.value = "+ Ready";
+    log.value = "++ Ready";
+    setButtons("init");
     $("div#msgPassword").html("Required");
-    setAccNumbers();
+    // setAccNumbers();
 };
 
-// for reference: $('#Button').prop('disabled', true);
+// -----------------------------------------------------------------
+function setButtons(activity) {
+    logger("setButtons, activity: " + activity);
+    // $("div.callMessages").html("Activity: " + activity);
+    switch (activity) {
+        case "init":
+            $('#sendSms').prop('disabled', true);
+            $('#conversation').prop('disabled', true);
+            $('#deleteConversation').prop('disabled', true);
+            $('#listSms').prop('disabled', true);
+            $('#deleteSms').prop('disabled', true);
+            $('#listSenderLogs').prop('disabled', true);
+            $('#deleteSenderLogs').prop('disabled', true);
+            break;
+        case "ready":
+            $('#sendSms').prop('disabled', false);
+            $('#conversation').prop('disabled', false);
+            $('#deleteConversation').prop('disabled', false);
+            $('#listSms').prop('disabled', false);
+            $('#deleteSms').prop('disabled', false);
+            $('#listSenderLogs').prop('disabled', false);
+            $('#deleteSenderLogs').prop('disabled', false);
+            break;
+    }
+}
 
 // -----------------------------------------------------------------------------
