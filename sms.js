@@ -160,7 +160,8 @@ function accNumbers() {
             logger("- Password invalid.");
             return;
         }
-        $("div#activityMessages").html("+ Completed.");
+        $("div#activityMessages").html("+ Completed, phone numbers listed.");
+        logger("------------");
         setAccNumbers();
     }).fail(function () {
         logger("- Get account phone numbers failed.");
@@ -215,7 +216,11 @@ function deleteConversation() {
     });
 }
 // -----------------------------------------------------------------------------
+var isSetAccNumbers = false;
 function setAccNumbers() {
+    if (isSetAccNumbers) {
+        return;
+    }
     logger("+ setAccNumbers");
     // $('#accountNumbers option:selected').val("+16505551111");
     var options = $("#accountNumbers");
@@ -243,6 +248,7 @@ function setAccNumbers() {
         $('#accountNumbers option')[0].selected = true; // by default, select the first option.
         $("div#activityMessages").html("+ Account phone numbers loaded.");
         setButtons("ready");
+        isSetAccNumbers = true;
     }).fail(function () {
         logger("- Get account phone numbers failed.");
     });
