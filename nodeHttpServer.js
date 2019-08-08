@@ -112,10 +112,10 @@ http.createServer(function (request, response) {
                 || uri === "/accountNumberList.php"
                 ) {
             var query = require('url').parse(request.url, true).query;
-            console.log("+ Run: " + uri + " " + query.tokenpassword);
             const exec = require('child_process').exec;
             const theProgramName = uri;
             const theProgram = 'php ' + path.join(process.cwd(), theProgramName) + " " + query.tokenpassword;
+            console.log("+ Run: " + theProgram);
             exec(theProgram, (error, stdout, stderr) => {
                 theResponse = `${stdout}`;
                 console.log('+ theResponse: ' + theResponse);
