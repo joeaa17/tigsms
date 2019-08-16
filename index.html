@@ -1,69 +1,8 @@
-<html>
+<html lang="en">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>SMS Messaging</title>
-        <link href="custom/favicon.ico" rel="shortcut icon" type="image/x-icon">
-        <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-        <link rel="stylesheet" href="custom/sms.css">
-        <script src="sms.js"></script>
+        <title>Tiger home</title>
+        <META HTTP-EQUIV="Refresh" CONTENT="0; URL=tigsms/index.html">
     </head>
     <body>
-        <script type="text/javascript" src="custom/pageTop.js"></script>
-        <div id="chatBox">
-            <div class="panelTitle">
-                SMS using Twilio Programmable Messaging
-            </div>
-            <div class="panelArea">
-                <table> 
-                    <tr>
-                        <td>Send from Twilio </td>
-                        <td>
-                            <select id="accountNumbers"></select>
-                        </td><td>
-                            <button id="btn-list" onclick="accNumbers();" class="abutton" style="font-size: 0.8em;padding: 2px 10px 0px 10px;width: 160px; height: 30px;">
-                                Get phone numbers
-                            </button>
-                        </td><td><div id="msgMsgFrom"></div>
-                        </td>
-                    </tr>
-                    <tr><td>Send to number </td><td><input id="msgTo" type="text"/></td><td><div id="msgMsgTo"></div></td></tr>
-                    <tr><td>Message </td><td><input id="msgBody" type="text"/></td><td><div id="msgMsgBody"></div></td></tr>
-                    <tr><td>Password </td><td><input type="password" id="smsPassword" name="smsPassword" placeholder="Your access password"/></td><td><div id="msgPassword"></div></td></tr>
-                </table>
-            </div>
-            <div class="panelArea">
-                <table>
-                    <tr>
-                        <td><button id="sendSms" class="abutton" onclick="sendSms();">Send</button></td>
-                        <td><button id="conversation" class="abutton" onclick="conversation();">List Conversation</button></td>
-                        <td><button id="deleteConversation" class="abutton" onclick="deleteConversation();">Delete Conversation</button></td>
-                        <td><button id="listSms" class="abutton" style="width: 70px;" onclick="listSms();">List today's</button></td>
-                        <td><button id="deleteSms" class="abutton" style="width: 70px;" onclick="deleteSms();">Delete today's</button></td>
-                        <td><button id="listSenderLogs" class="abutton" onclick="listSenderLogs();">List sender logs</button></td>
-                        <td><button id="deleteSenderLogs" class="abutton" onclick="deleteSenderLogs();">Delete sender logs</button></td>
-                    </tr>
-                </table>
-            </div>
-            <div class="panelArea">
-                Activity messages:
-                <div id="activityMessages" style='margin-left: 12px'>+ Ready</div>
-            </div>
-        </div>
-        <div id="logBox">
-            <div class="panelTitle">
-                Log messages
-            </div>
-            <div class="panelArea">
-                <textarea id="log"></textarea>
-            </div>
-            <div class="panelArea">
-                <table>
-                    <tr>
-                        <td><button class="abutton" onclick="clearLog();">Clear</button></td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-        <script type="text/javascript" src="custom/pageBottom.js"></script>
     </body>
 </html>

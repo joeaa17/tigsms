@@ -19,7 +19,7 @@ if ($msgTo == "") {
 date_default_timezone_set( "UTC" );
 // date_default_timezone_set( "America/Los_Angeles" );
 
-require __DIR__ . '/twilio-php-master/Twilio/autoload.php';
+require __DIR__ . '/../twilio-php-master/Twilio/autoload.php';
 
 use Twilio\Rest\Client;
 

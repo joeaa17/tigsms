@@ -22,7 +22,7 @@ http.createServer(function (request, response) {
     fs.exists(filename, function (exists) {
         console.log("+ request.url: " + request.url + ", URI: " + uri);
 
-        if (uri === "/sendSms.php") {
+        if (uri === "/tigsms/sendSms.php") {
             // /agents?msgFrom=me&To=you
             var query = require('url').parse(request.url, true).query;
             console.log("+ Send From: " + query.msgFrom + ' To: ' + query.msgTo + ' : ' + query.msgBody);
@@ -42,7 +42,7 @@ http.createServer(function (request, response) {
             });
             return;
         }
-        if (uri === "/smsConversation.php" || uri === "/smsConversationDelete.php") {
+        if (uri === "/tigsms/smsConversation.php" || uri === "/tigsms/smsConversationDelete.php") {
             // /agents?msgFrom=me&To=you
             var query = require('url').parse(request.url, true).query;
             console.log("+ Parameters, From: " + query.msgFrom + ' To: ' + query.msgTo);
@@ -63,7 +63,7 @@ http.createServer(function (request, response) {
             });
             return;
         }
-        if (uri === "/smsListSenderFilter.php" || uri === "/smsListSenderFilterDelete.php") {
+        if (uri === "/tigsms/smsListSenderFilter.php" || uri === "/tigsms/smsListSenderFilterDelete.php") {
             // /agents?msgFrom=me&To=you
             var query = require('url').parse(request.url, true).query;
             console.log("+ Sender parameters, From: " + query.msgFrom);
@@ -85,8 +85,8 @@ http.createServer(function (request, response) {
             return;
         }
         // ---------------------------------------------------------------------
-        if (uri === "/smsListDateFilter.php"
-                || uri === "/smsListDateFilterDelete.php"
+        if (uri === "/tigsms/smsListDateFilter.php"
+                || uri === "/tigsms/smsListDateFilterDelete.php"
                 ) {
             var query = require('url').parse(request.url, true).query;
             console.log("+ Run: " + uri);
@@ -108,8 +108,8 @@ http.createServer(function (request, response) {
             return;
         }
         // ---------------------------------------------------------------------
-        if (uri === "/accountPhoneNumbers.php"
-                || uri === "/accountNumberList.php"
+        if (uri === "/tigsms/accountPhoneNumbers.php"
+                || uri === "/tigsms/accountNumberList.php"
                 ) {
             var query = require('url').parse(request.url, true).query;
             const exec = require('child_process').exec;
@@ -127,37 +127,6 @@ http.createServer(function (request, response) {
                 response.write(theResponse, "binary");
                 response.end();
                 console.log('+ Sent response.');
-            });
-            return;
-        }
-        // ---------------------------------------------------------------------
-        if (uri === "/sendSms1.php") {
-            console.log("++ Send SMS message.");
-            theParam = request.url.substring(request.url.indexOf("?"));
-            console.log("+ theParam :" + theParam + ":");
-            //
-            theHostnameFieldname = "&tokenhost=";
-            var theIndex = request.url.indexOf(theHostnameFieldname);
-            if (theIndex > 0) {
-                tokenHost = request.url.substring(theIndex + theHostnameFieldname.length);
-            }
-            theRequest = "https://" + tokenHost + "/sendsms" + theParam;
-            console.log('+ theRequest:', theRequest);
-            makeRequest(theRequest, function (theError, theFullResponse, theResponse) {
-                theResponseStatusCode = theFullResponse && theFullResponse.statusCode;
-                if (theResponseStatusCode === 200) {
-                    console.log('+ theResponse:', theResponse);
-                    response.writeHead(200);
-                    response.write(theResponse, "binary");
-                    response.end();
-                } else {
-                    console.log('- Error:', theError);
-                    console.log('- Status code: ' + theResponseStatusCode);
-                    response.writeHead(500, {"Content-Type": "text/plain"});
-                    response.write('- Error: ' + theError + "\n");
-                    response.write('- Status code: ' + theResponseStatusCode + "\n");
-                    response.end();
-                }
             });
             return;
         }
